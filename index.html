@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta name="theme-color" content="#fff" id="thc">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MaX</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -278,6 +279,7 @@ body.cls .con {
   <li><a href="https://microintel.github.io/kaprekar6174/">Kaprekar Constant</a></li>
   <li><a href="https://microintel.github.io/cc1/">colletz conjecture</a></li>
   <li><a href="https://microintel.github.io/percent/">Percentage</a></li>
+  <li><a href="https://microintel.github.io/max/cal/factorial.html">Factorial</a></li>
   
   
   </ul>
@@ -306,6 +308,22 @@ body.cls .con {
   <iframe id="fr" src="https://microintel.github.io/max/home.html" name="f"></iframe>
 </div>
 <script>
+
+function setThc() {
+  let clr = getComputedStyle(document.documentElement).getPropertyValue('--nb').trim();
+  let m = document.querySelector('meta[name="theme-color"]');
+  if (m) {
+    m.setAttribute("content", clr);
+  } else {
+    m = document.createElement("meta");
+    m.setAttribute("name", "theme-color");
+    m.setAttribute("content", clr);
+    document.head.appendChild(m);
+  }
+}
+
+
+
 let sdb=document.getElementById("sdb")
 let stg=document.getElementById("stg")
 let mtg=document.getElementById("mtg")
