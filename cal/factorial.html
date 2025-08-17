@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial</title>
+    <style>
+        :root {
+            --bg-color: #f0f0f0;
+            --main-color: #007bff;
+            --text-color: #333;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-color: #ccc;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            flex-direction: column;
+            padding: 1em;
+        }
+
+        .c {
+            padding: 2em;
+            border-radius: 10px;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin-top: 0;
+            color: #666;
+        }
+
+        input {
+            padding: 0.75em;
+            font-size: 1em;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 0.75em 1.5em;
+            font-size: 1em;
+            color: white;
+            background-color: var(--main-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #r {
+            margin-top: 1.5em;
+            font-size: 1.2em;
+            color: var(--main-color);
+            font-weight: bold;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .c {
+                padding: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="c">
+    <h1>Factorial</h1>
+    <p>Enter a number to find its factorial.</p>
+    <input type="number" id="n" min="0" placeholder="5">
+    <button onclick="cal()">Find</button>
+    <div id="r"></div>
+</div>
+
+<script>
+    function cal() {
+        const n = parseInt(document.getElementById('n').value);
+        const rDiv = document.getElementById('r');
+
+        if (isNaN(n) || n < 0) {
+            rDiv.textContent = "Enter a valid non-negative integer.";
+            rDiv.style.color = "red";
+            return;
+        }
+/*
+        if () {
+            rDiv.textContent = "For performance, please enter a number up to 20.";
+            rDiv.style.color = "orange";
+            return;
+        }
+*/
+        let f = 1n;
+        for (let i = 2; i <= n; i++) {
+            f *= BigInt(i);
+        }
+
+        rDiv.innerHTML= `The factorial of <span style="color:red;">${n}</span> is <br><br> ${f}.`;
+        rDiv.style.color = "black";
+    }
+</script>
+
+</body>
+</html>
