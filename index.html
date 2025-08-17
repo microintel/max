@@ -1,0 +1,396 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MaX</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root {
+  --bg:#f4f7f6;
+  --tx:#34495e;
+  --sb:#2c3e50;
+  --st:#ecf0f1;
+  --sl:#bdc3c7;
+  --sh:#34495e;
+  --ab:#3498db;
+  --ab2:#2980b9;
+  --nb:#fff;
+  --nt:#34495e;
+  --bx:0 2px 5px rgba(0,0,0,.1);
+}
+
+.dar {
+  --bg:#1a1a1a;
+  --tx:#ecf0f1;
+  --sb:#1f1f1f;
+  --st:#f0f0f0;
+  --sl:#ccc;
+  --sh:#333;
+  --ab:#007bff;
+  --ab2:#0056b3;
+  --nb:#2c3e50;
+  --nt:#ecf0f1;
+  --bx:0 2px 5px rgba(0,0,0,.5);
+}
+
+body {
+  font-family:Arial, sans-serif;
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--tx);
+  transition:.3s;
+}
+
+.top {
+  background:var(--nb);
+  color:var(--nt);
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:var(--bx);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:999;
+  height:60px;
+  box-sizing:border-box;
+  transition:.3s;
+}
+
+.top h1 {
+  margin:0;
+  font-size:1.5rem;
+}
+
+.top .rig {
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.top .btn {
+  background:none;
+  border:none;
+  color:var(--nt);
+  cursor:pointer;
+  font-size:1.2rem;
+}
+
+.sdb {
+  width:250px;
+  background:var(--sb);
+  color:var(--st);
+  padding:20px 0;
+  height:100vh;
+  position:fixed;
+  top:0;
+  left:0;
+  box-shadow:2px 0 5px rgba(0,0,0,.1);
+  transition:.3s;
+  z-index:1000;
+}
+
+.sdb.cls {
+  width:0;
+  overflow:hidden;
+  padding:0;
+  transform:translateX(-100%);
+}
+
+.sch {
+  padding:0 20px;
+  margin-bottom:20px;
+}
+
+.sch input {
+  width:100%;
+  padding:10px;
+  border:1px solid #555;
+  background:#444;
+  color:#ecf0f1;
+  border-radius:5px;
+  box-sizing:border-box;
+}
+
+.sdh {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 20px;
+  margin-bottom:30px;
+}
+
+.stg {
+  background:none;
+  border:none;
+  color:var(--st);
+  font-size:1.5rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.stg:hover {
+  color:var(--ab);
+}
+
+.sdb ul {
+  list-style:none;
+  padding:0;
+  height:90vh;
+  display:flex;
+  flex-direction:column;
+  overflow-y:auto;
+  margin:0;
+}
+
+.sdb li a {
+  display:flex;
+  align-items:center;
+  padding:15px 25px;
+  text-decoration:none;
+  color:var(--sl);
+  transition:.3s;
+  font-size:1rem;
+}
+
+.sdb li a i {
+  margin-right:10px;
+  width:20px;
+}
+
+.sdb li a:hover {
+  background:red;
+  color:var(--st);
+}
+
+.sdb li a.act {
+  background:var(--ab);
+  color:#fff;
+  border-left:5px solid var(--ab2);
+  padding-left:20px;
+}
+
+.con {
+  margin-left:0;
+  padding:0;
+  padding-top:0;
+  flex-grow:1;
+  transition:.3s;
+}
+
+body.cls .con {
+  margin-left:20px;
+}
+
+@media(max-width:768px) {
+  .sdb {
+    width:250px;
+    transform:translateX(-100%);
+    z-index:1000;
+  }
+
+  .sdb.act {
+    transform:translateX(0);
+  }
+
+  .con {
+    margin-left:0;
+  }
+
+  .top {
+    padding:0 20px;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  body.cls .con {
+    margin-left:0;
+  }
+}
+
+#fr {
+  width:100vw;
+  height:calc(100vh - 50px);
+  border:0;
+  margin-top:50px;
+  background:#333;
+}
+
+.sdb li ul {
+  list-style:none;
+  padding-left:20px;
+  display:none;
+}
+
+.sdb li.opn > ul {
+  display:block;
+}
+
+.sdb li a.tog {
+  justify-content:space-between;
+}
+
+.hlt {
+  background:yellow;
+  color:#000 !important;
+}
+
+.rot {
+  transform:rotate(180deg);
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <button class="btn" id="mtg"><i class="fas fa-bars"></i></button>
+  <h1>MaX</h1>
+  <div class="rig">
+    <button class="btn" id="ttg"><i class="fas fa-moon"></i></button>
+  </div>
+</header>
+<aside class="sdb" id="sdb">
+  <div class="sdh">
+    <h3>Select Calculaters</h3>
+    <button class="stg" id="stg"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="sch">
+    <input type="text" id="sch" placeholder="Search...">
+  </div>
+  <ul class="men">
+  
+  <li>
+  <a href="#" class="tog"><i class="fas fa-rupee-sign"></i> Finance <i class="fas fa-caret-down"></i></a>
+  <ul>
+  
+  <li><a href="https://microintel.github.io/cagr/cagr.html">CAGR Calculator</a></li>
+  <li><a href="https://microintel.github.io/vision/v2/">SIP Calculator</a></li>
+  
+  
+  
+  </ul>
+  </li>
+  
+  <li>
+  <a href="#" class="tog"><i class="fas fa-square-root-alt"></i> Maths <i class="fas fa-caret-down"></i></a>
+  <ul>
+  <li><a href="https://microintel.github.io/kaprekar6174/">Kaprekar Constant</a></li>
+  <li><a href="https://microintel.github.io/cc1/">colletz conjecture</a></li>
+  <li><a href="https://microintel.github.io/percent/">Percentage</a></li>
+  
+  
+  </ul>
+  </li>
+  
+  <li>
+  <a href="#" class="tog"><i class="fas fa-flask"></i> Science <i class="fas fa-caret-down"></i></a>
+  <ul>
+  
+  <li><a href="#">Units</a></li>
+  </ul>
+  </li>
+  
+  
+  
+  <li>
+  <a href="#" class="tog"><i class="fas fa-tools"></i> Utility <i class="fas fa-caret-down"></i></a>
+  <ul>
+  <li><a href="https://microintel.github.io/cie/">Diploma CIE Book</a></li>
+  
+  </ul>
+  </li>
+  </ul>
+</aside>
+<div class="con" id="con">
+  <iframe id="fr" src="https://microintel.github.io/max/home.html" name="f"></iframe>
+</div>
+<script>
+let sdb=document.getElementById("sdb")
+let stg=document.getElementById("stg")
+let mtg=document.getElementById("mtg")
+let ttg=document.getElementById("ttg")
+let sch=document.getElementById("sch")
+let fr=document.getElementById("fr")
+
+function tog() {
+  sdb.classList.toggle("act")
+  document.body.classList.toggle("cls")
+}
+
+stg.onclick=tog
+mtg.onclick=tog
+
+document.addEventListener("click",e=>{
+  if(!sdb.contains(e.target) && !mtg.contains(e.target) && sdb.classList.contains("act")) {
+    sdb.classList.remove("act")
+    document.body.classList.remove("cls")
+  }
+})
+
+ttg.onclick=()=>{
+  document.body.classList.toggle("dar")
+  let d=document.body.classList.contains("dar")
+  ttg.querySelector("i").classList.toggle("fa-moon",!d)
+  ttg.querySelector("i").classList.toggle("fa-sun",d)
+}
+
+document.querySelectorAll(".men li a[href]").forEach(a=>{
+  a.onclick=e=>{
+    if(!a.classList.contains("tog")) {
+      e.preventDefault()
+      fr.src=a.href
+      sdb.classList.remove("act")
+    }
+  }
+})
+
+document.querySelectorAll(".tog").forEach(t=>{
+  t.onclick=e=>{
+    e.preventDefault()
+    let li=t.parentElement
+    li.classList.toggle("opn")
+    t.querySelector("i.fas.fa-caret-down").classList.toggle("rot")
+  }
+})
+
+function clr() {
+  document.querySelectorAll(".hlt").forEach(s=>{
+    s.outerHTML=s.innerText
+  })
+}
+
+sch.oninput=e=>{
+  clr()
+  let v=e.target.value.toLowerCase()
+  document.querySelectorAll(".sdb li").forEach(li=>{
+    let a=li.querySelector("a")
+    let tx=a?a.textContent.toLowerCase():""
+    if(v==="") {
+      li.style.display=""
+      li.classList.remove("opn")
+    }
+    else if(tx.includes(v)) {
+      li.style.display=""
+      let rg=new RegExp("("+v+")","gi")
+      a.innerHTML=a.textContent.replace(rg,'<span class="hlt">$1</span>')
+      let p=li.parentElement.closest("li")
+      while(p) {
+        p.classList.add("opn")
+        p.style.display=""
+        p=p.parentElement.closest("li")
+      }
+    }
+    else {
+      let c=li.querySelector("ul li[style='display: ;']")
+      if(!c) li.style.display="none"
+    }
+  })
+}
+
+if(window.innerWidth<=768) {
+  sdb.classList.remove("act")
+}
+</script>
+</body>
+</html>
