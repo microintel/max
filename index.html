@@ -82,15 +82,16 @@ body {
 
 .sdb {
   width:250px;
-  background:var(--sb);
-  color:var(--st);
+  background: var(--nb);
+  backdrop-filter: blur(20px);
+  color:var(--nt);
   padding:20px 0;
   height:100vh;
   position:fixed;
   top:0;
   left:0;
   box-shadow:2px 0 5px rgba(0,0,0,.1);
-  transition:.3s;
+  transition:.4s;
   z-index:1000;
 }
 
@@ -98,7 +99,7 @@ body {
   width:0;
   overflow:hidden;
   padding:0;
-  transform:translateX(-100%);
+  transform:translateX(-0%);
 }
 
 .sch {
@@ -109,25 +110,30 @@ body {
 .sch input {
   width:100%;
   padding:10px;
-  border:1px solid #555;
-  background:#444;
-  color:#ecf0f1;
+  border:1px solid var(--nt);
+  background:var(--nb);
+  color:var(--nt);
   border-radius:5px;
   box-sizing:border-box;
 }
 
+.sch input::placeholder{
+color:var(--nt);
+}
 .sdh {
   display:flex;
   justify-content:space-between;
   align-items:center;
   padding:0 20px;
   margin-bottom:30px;
+  
 }
 
 .stg {
   background:none;
+  
   border:none;
-  color:var(--st);
+  color:var(--nt);
   font-size:1.5rem;
   cursor:pointer;
   transition:.3s;
@@ -152,7 +158,7 @@ body {
   align-items:center;
   padding:15px 25px;
   text-decoration:none;
-  color:var(--sl);
+  color:var(--nt);
   transition:.3s;
   font-size:1rem;
 }
@@ -242,6 +248,18 @@ body.cls .con {
 .rot {
   transform:rotate(180deg);
 }
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:red;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: none;
+  z-index: 2;
+}
 </style>
 </head>
 <body>
@@ -305,8 +323,10 @@ body.cls .con {
   </li>
   </ul>
 </aside>
+
 <div class="con" id="con">
   <iframe id="fr" src="https://microintel.github.io/max/home.html" name="f"></iframe>
+  <div id="overlay"></div>
 </div>
 <script>
 
@@ -323,7 +343,8 @@ function setThc() {
   }
 }
 
-
+overl=document.getElementById('overlay');
+overl.onclick=()=>{sdb.classList.remove("act")};
 
 let sdb=document.getElementById("sdb")
 let stg=document.getElementById("stg")
