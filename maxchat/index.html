@@ -1,1 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>maxChat</title>
+    <style>
+        :root {
+            --bg-light: #f4f4f4;
+            --cbg-light: #ffffff;
+            --ubbl-light: #e6e6e6;
+            --ut-light: #2c3e50;
+            --bbbl-light: #f0f0f0;
+            --bt-light: #34495e;
+            --ibg-light: #ffffff;
+            --ibdr-light: #ccc;
+            --sbtn-light: #bdc3c7;
+            --sbtn-hvr-light: #95a5a6;
+            --sugg-bg-light: #ffffff;
+            --sugg-brdr-light: #e0e0e0;
+            --sugg-hov-light: #f5f5f5;
+            --lclr-light: #3498db;
+            
+            --bg-dark: #000000;
+            --cbg-dark: #1a1a1a;
+            --ubbl-dark: #333333;
+            --ut-dark: #e0e0e0;
+            --bbbl-dark: #222222;
+            --bt-dark: #c0c0c0;
+            --ibg-dark: #111111;
+            --ibdr-dark: #444444;
+            --sbtn-dark: #555555;
+            --sbtn-hvr-dark: #777777;
+            --sugg-bg-dark: #151515;
+            --sugg-brdr-dark: #303030;
+            --sugg-hov-dark: #252525;
+            --lclr-dark: #00e676;
+        }
+        
+        body {
+            background-color: var(--bg);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        body {
+            --bg: var(--bg-dark);
+            --cbg: var(--cbg-dark);
+            --ubbl: var(--ubbl-dark);
+            --ut: var(--ut-dark);
+            --bbbl: var(--bbbl-dark);
+            --bt: var(--bt-dark);
+            --ibg: var(--ibg-dark);
+            --ibdr: var(--ibdr-dark);
+            --sbtn: var(--sbtn-dark);
+            --sbtn-hvr: var(--sbtn-hvr-dark);
+            --sugg-bg: var(--sugg-bg-dark);
+            --sugg-brdr: var(--sugg-brdr-dark);
+            --sugg-hov: var(--sugg-hov-dark);
+            --lclr: var(--lclr-dark);
+        }
+        
+        body.light-mode {
+            --bg: var(--bg-light);
+            --cbg: var(--cbg-light);
+            --ubbl: var(--ubbl-light);
+            --ut: var(--ut-light);
+            --bbbl: var(--bbbl-light);
+            --bt: var(--bt-light);
+            --ibg: var(--ibg-light);
+            --ibdr: var(--ibdr-light);
+            --sbtn: var(--sbtn-light);
+            --sbtn-hvr: var(--sbtn-hvr-light);
+            --sugg-bg: var(--sugg-bg-light);
+            --sugg-brdr: var(--sugg-brdr-light);
+            --sugg-hov: var(--sugg-hov-light);
+            --lclr: var(--lclr-light);
+        }
+        
+        .c-cntr {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--cbg);
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        @media (min-width: 768px) {
+            .c-cntr {
+                width: 95%;
+                max-width: 600px;
+                height: 90vh;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
+        .c-hdr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--ibdr);
+            background-color: var(--cbg);
+            color: var(--ut);
+        }
+        
+        .c-hdr h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .t-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--ut);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        
+        .c-log {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            line-height: 1.4;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .c-log::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .msg {
+            display: flex;
+            align-items: flex-start;
+            
+        }
+        
+        .msg.usr {
+            justify-content: flex-end;
+           
+        }
+        
+        .msg.bot {
+            justify-content: flex-start;
+        }
+        
+        .bbl {
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 75%;
+            color:black;
+            word-wrap: break-word;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            white-space: pre-wrap;
+        }
+        
+        .msg.usr .bbl {
+            background-color: var(--ut);
+            color:var(--bg);
+            border-bottom-right-radius: 4px;
+        }
+        
+        .msg.bot .bbl {
+            background-color: lightgreen;
+            color: black;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .c-blk {
+            margin-top:10px;
+            background-color: var(--bg);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            color:var(--ut);
+            white-space: pre-wrap;
+        }
+        
+        .i-a {
+            padding: 15px;
+            border-top: 1px solid #2d2d2d;
+            background-color: var(--ibg);
+            position: relative;
+        }
+        
+        .s-box {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: var(--sugg-bg);
+            border-top: 1px solid var(--sugg-brdr);
+            border-bottom: 1px solid var(--sugg-brdr);
+            display: none;
+            z-index: 10;
+        }
+        
+        .s-box li {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--bt);
+            transition: background-color 0.2s;
+        }
+        
+        .s-box li.active {
+            background-color: var(--sugg-hov);
+        }
+        
+        .s-box li:hover {
+            background-color: var(--sugg-hov);
+        }
+        
+        .i-f {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #chat-i {
+        flex-grow: 1;
+        padding: 14px;
+        border: 1px solid var(--ibdr);
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        background-color: var(--ibg);
+        color: var(--ut);
+        resize: none;
+        line-height: 1.4;
+        overflow: scroll;
+        height: auto;
+        min-height: 44px;
+        max-height: 200px;
+        box-sizing: border-box;
+        }
+        
+        #chat-i:focus {
+            border-color: var(--ut);
+        }
+        
+        #s-btn {
+            background-color: var(--sbtn);
+            color: var(--ut);
+            border: none;
+            border-radius: 24px;
+            padding: 12px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        
+        #s-btn:hover {
+            background-color: var(--sbtn-hvr);
+        }
+    </style>
+</head>
+<body class="dark-mode">
 
+    <div class="c-cntr">
+        <div class="c-hdr">
+            <h1>MaxCHAT</h1>
+            <button id="t-btn" class="t-btn">
+                <svg id="moon-i" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg id="sun-i" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </div>
+        <div class="c-log" id="c-log">
+            <div class="msg bot">
+                
+            </div>
+        </div>
+        <div class="i-a">
+            <ul class="s-box" id="s-box"></ul>
+            <form id="i-f" class="i-f">
+                <textarea id="chat-i" placeholder="Enter" autocomplete="off" spellcheck="false" rows="1"></textarea>
+                <button type="submit" id="s-btn">Send</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="cal.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
